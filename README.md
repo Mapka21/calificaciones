@@ -48,7 +48,6 @@ calificaciones/
 ├── routes/          # Rutas Express
 ├── app.js           # Configuración principal
 └── package.json     # Dependencias y scripts
-Capturas de Pantalla 🖼️
 Listado de Asignaturas	Gestión de Actividades
 Asignaturas	Actividades
 Licencia 📄
