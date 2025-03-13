@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editar Actividad</title>
+</head>
+<body>
+    <h1>Editar Actividad</h1>
+    <form action="/activities/<%= activity.id %>?_method=PUT" method="POST">
+        <input type="hidden" name="_method" value="PUT">
+        <div>
+            <label>Tipo de actividad:</label>
+            <select name="type" required>
+                <option value="Tarea" <%= activity.type === 'Tarea' ? 'selected' : '' %>>Tarea</option>
+                <option value="Prueba Rápida" <%= activity.type === 'Prueba Rápida' ? 'selected' : '' %>>Prueba Rápida</option>
+                <option value="Parcial" <%= activity.type === 'Parcial' ? 'selected' : '' %>>Parcial</option>
+                <option value="Proyecto" <%= activity.type === 'Proyecto' ? 'selected' : '' %>>Proyecto</option>
+            </select>
+        </div>
+        <div>
+            <label>Calificación:</label>
+            <input type="number" step="0.01" name="grade" value="<%= activity.grade %>" required>
+        </div>
+        <div>
+            <label>Fecha:</label>
+            <input type="date" name="date" value="<%= activity.date.toISOString().split('T')[0] %>" required>
+        </div>
+        <div>
+            <label>Comentarios:</label>
+            <textarea name="comments"><%= activity.comments %></textarea>
+        </div>
+        <button type="submit">Actualizar</button>
+        <a href="/activities/<%= activity.SubjectId %>">Cancelar</a>
+    </form>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividades de <%= subject.name %></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        .grade-badge { min-width: 80px; font-size: 1.1em; }
+        .table-hover tbody tr:hover { background-color: #f8f9fa; }
+    </style>
+</head>
+<body class="bg-light">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="/">Sistema Calificaciones</a>
+            <a href="/subjects" class="btn btn-light">
+                <i class="bi bi-arrow-left"></i> Volver
+            </a>
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="h3"><%= subject.name %></h1>
+            <a href="/activities/<%= subject.id %>/new" class="btn btn-primary">
+                <i class="bi bi-plus-lg"></i> Nueva Actividad
+            </a>
+        </div>
+
+        <!-- Tabla de actividades -->
+        <div class="card shadow">
+            <div class="card-body p-0">
+                <table class="table table-hover mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Tipo</th>
+                            <th>Calificación</th>
+                            <th>Fecha</th>
+                            <th>Comentarios</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% subject.Activities.forEach(activity => { %>
+                        <tr>
+                            <td><%= activity.type %></td>
+                            <td>
+                                <span class="badge <%= activity.grade >= 6 ? 'bg-success' : 'bg-warning text-dark' %> grade-badge">
+                                    <%= activity.grade %>
+                                </span>
+                            </td>
+                            <td><%= activity.date.toLocaleDateString() %></td>
+                            <td><%= activity.comments || '--' %></td>
+                            <td>
+                                <div class="btn-group">
+                                    <a href="/activities/<%= activity.id %>/edit" class="btn btn-sm btn-outline-primary">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <form action="/activities/<%= activity.id %>?_method=DELETE" method="POST">
+                                        <button type="submit" class="btn btn-sm btn-outline-danger">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

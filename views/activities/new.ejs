@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nueva Actividad - <%= subject.name %></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        .form-card { max-width: 600px; margin: 2rem auto; }
+        .required:after { content: "*"; color: red; margin-left: 3px; }
+    </style>
+</head>
+<body class="bg-light">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="/">Sistema Calificaciones</a>
+            <a href="/activities/<%= subject.id %>" class="btn btn-light">
+                <i class="bi bi-arrow-left"></i> Volver
+            </a>
+        </div>
+    </nav>
+
+    <!-- Formulario -->
+    <div class="container">
+        <div class="card shadow form-card">
+            <div class="card-body">
+                <h2 class="h4 mb-4">Nueva Actividad para <%= subject.name %></h2>
+                
+                <form action="/activities/<%= subject.id %>" method="POST">
+                    <div class="row g-3">
+                        <!-- Tipo de Actividad -->
+                        <div class="col-12">
+                            <label class="form-label required">Tipo</label>
+                            <select name="type" class="form-select" required>
+                                <option value="Tarea">Tarea</option>
+                                <option value="Prueba Rápida">Prueba Rápida</option>
+                                <option value="Parcial">Parcial</option>
+                                <option value="Proyecto">Proyecto</option>
+                            </select>
+                        </div>
+
+                        <!-- Calificación -->
+                        <div class="col-md-6">
+                            <label class="form-label required">Calificación</label>
+                            <input type="number" step="0.01" name="grade" 
+                                   class="form-control" min="0" max="10" required>
+                        </div>
+
+                        <!-- Fecha -->
+                        <div class="col-md-6">
+                            <label class="form-label required">Fecha</label>
+                            <input type="date" name="date" 
+                                   class="form-control" required>
+                        </div>
+
+                        <!-- Comentarios -->
+                        <div class="col-12">
+                            <label class="form-label">Comentarios</label>
+                            <textarea name="comments" class="form-control" 
+                                     rows="3" placeholder="Opcional"></textarea>
+                        </div>
+
+                        <!-- Botones -->
+                        <div class="col-12 d-flex justify-content-end gap-2">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-save"></i> Guardar
+                            </button>
+                            <a href="/activities/<%= subject.id %>" 
+                               class="btn btn-outline-secondary">
+                                Cancelar
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
